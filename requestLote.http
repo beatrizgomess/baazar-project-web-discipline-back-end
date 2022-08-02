@@ -1,0 +1,10 @@
+POST http://localhost:8080/Lote
+Content-Type: application/json
+
+{
+  "id_orgao_fiscalizador": 2,
+  "id_orgao_donatario": 2,
+  "dataEntrega": "2022-8-02",
+  "observacao":"PRODUTOS FRAGÉIS"
+
+}

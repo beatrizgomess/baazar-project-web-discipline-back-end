@@ -9,13 +9,12 @@ import com.infortech.Bazar.model.classes.Lote;
 public class LoteRepository implements GenericRepository<Lote, Integer>{
 	
 	public void create(Lote lt) {
+		String sql 	= "INSERT INTO LOTE (ID_ORGAO_FISCALIZADOR, ID_ORGAO_DONATARIO, DATA_ENTREGA, OBSERVACAO) VALUES (?, ?, ?, ?)";
 		try {
-			PreparedStatement ps = ConnectionManager.getCurrentConnection().
-					prepareStatement("INSERT INTO LOTE (ID_ORGAO_FISCALIZADOR, ID_ORGAO_DONATARIO, DATA_ENTREGA, OBSERVACAO)"
-							+ "VALUES (?, ?, ?, ?)");
-			ps.setString(1, "1");
-			ps.setString(2, "1");
-			ps.setDate(3, lt.getDataEntrega());
+			PreparedStatement ps = ConnectionManager.getCurrentConnection().prepareStatement(sql);
+			ps.setInt(1, lt.getId_orgao_fiscalizador().getId());
+			ps.setInt(2, lt.getId_orgao_donatario().getId());
+			ps.setString(3, String.valueOf(lt.getDataEntrega()));
 			ps.setString(4, lt.getObservacao());
 			
 			ps.execute();

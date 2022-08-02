@@ -1,0 +1,41 @@
+POST http://localhost:8080/OrgaoDonatario
+Content-Type: application/json
+
+{"nome": "Hospital das clinicas",
+  "endereco":"Cidade Universitária",
+  "telefone": "(81) 2227-7826",
+  "horarioFuncionamento": "9h AM e 17h PM",
+  "descricao": "Doe"
+}
+
+
+###
+
+PUT http://localhost:8080/OrgaoDonatario
+Content-Type: application/json
+{
+  "id": 3,
+  "nome": "Hospital das clínicas UFPE",
+  "endereco":"Cidade Universitária",
+  "telefone": "(81) 2227-7826",
+  "horarioFuncionamento": "9h AM e 17h PM",
+  "descricao": "Doe"
+}
+
+
+###
+
+GET http://localhost:8080/OrgaoDonatario/1
+Content-Type: application/json
+
+
+###
+
+DELETE http://localhost:8080/OrgaoDonatario/1
+Content-Type: application/json
+
+
+###
+
+GET http://localhost:8080/OrgaoDonatario/
+Content-Type: application/json

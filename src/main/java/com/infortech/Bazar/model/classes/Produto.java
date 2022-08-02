@@ -4,7 +4,18 @@ public class Produto {
 	private int codigo;
 	private String nome;
 	private String descricao;
-	
+
+	private Lote id_lote;
+
+
+	public Lote getId_lote() {
+		return id_lote;
+	}
+
+	public void setId_lote(Lote id_lote) {
+		this.id_lote = id_lote;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}
