@@ -9,6 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.infortech.Bazar.model.classes.Lote;
+import com.infortech.Bazar.model.classes.OrgaoDonatario;
+import com.infortech.Bazar.model.classes.OrgaoFiscalizador;
 import com.infortech.Bazar.model.classes.Produto;
 
 public class ProdutoRepository implements GenericRepository<Produto, Integer>{
@@ -67,8 +69,7 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
 
                 produto = new Produto();
 
-                produto.setCodigo(Integer.parseInt(result.getString("CODIGO")));
-                //produto.setId_lote(result.getString("ID_LOTE"));
+                produto.setCodigo(result.getInt("CODIGO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));
 
@@ -78,10 +79,18 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
                 lote.setId(result.getInt("ID"));
                 lote.setDataEntrega(result.getDate("DATA_ENTREGA"));
                 lote.setObservacao(result.getString("OBSERVAÇÃO"));
-                //lote.setId_orgao_fiscalizador(result.getInt("ID_ORGAO_FISCALIZADOR"));
-                //lote.setId_orgao_donatario(result.getInt("ID_ORGAO_DONATARIO"));
+
+                OrgaoFiscalizador orgaoFiscalizador = new OrgaoFiscalizador();
+                orgaoFiscalizador.setId(result.getInt("ID"));
+
+                OrgaoDonatario orgaoDonatario = new OrgaoDonatario();
+                orgaoDonatario.setId(result.getInt("ID"));
+                lote.setId_orgao_fiscalizador(orgaoFiscalizador);
+                lote.setId_orgao_donatario(orgaoDonatario);
 
                 produto.setId_lote(lote);
+
+
             }
 
         } catch (SQLException ex) {
@@ -128,18 +137,15 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
                 produto.setCodigo(result.getInt("CODIGO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));
-                //produto.setNomeDono(result.getString("nomedono"));
 
 
                 Lote lote = new Lote();
-
                 lote.setId(result.getInt("ID"));
                 lote.setDataEntrega(result.getDate("DATA_ENTREGA"));
                 lote.setObservacao(result.getString("OBSERVACAO"));
-                //lote.setId_orgao_fiscalizador(result.getObject("ID_ORGAO_FISCALIZADOR"));
-                //lote.setId_orgao_donatario(result.getDouble("ID_ORGAO_DONATARIO"));
 
                 produto.setId_lote(lote);
+                produtos.add(produto);
             }
 
 

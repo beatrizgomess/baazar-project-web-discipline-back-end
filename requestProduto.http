@@ -1,9 +1,28 @@
 POST http://localhost:8080/Produto
 Content-Type: application/json
 
-{"nome": "Smarthphone Samsung",
-  "descricao":"Descrição do produto",
-  "id_lote": 1
+{
+  "codigo": 6537,
+  "nome": "Smarthphone ASUS Z7",
+  "descricao":"Descrição do ASUS",
+  "id_lote":{
+    "id": 2,
+    "dataEntrega": "2022-08-01",
+    "observacao": "Produtos Fragéis",
+    "id_orgao_donatario": {
+      "id": 2,
+      "nome": "Hospital das clínicas UFPE",
+      "endereco": "Cidade Universitária",
+      "telefone": "(81) 2227-7826",
+      "horarioFuncionamento": "9h AM e 17h PM",
+      "descricao": "Doe"
+    },
+    "id_orgao_fiscalizador": {
+      "id": 2,
+      "nome": "Hospital das clínicas UFPE",
+      "descricao": "Doe"
+    }
+  }
 }
 
 ###
@@ -12,23 +31,23 @@ PUT http://localhost:8080/OrgaoDonatario
 Content-Type: application/json
 
 {
-  "id": 1,
-  "nome": "Policia Federal - [ PF ] ",
-  "descricao":"Descrição do orgão fiscalizador"
+  "codigo": 6537,
+  "nome": "Smarthphone Motorola",
+  "descricao":"Descrição do Motorola"
 }
 
 ###
 
-GET http://localhost:8080/OrgaoFiscalizador/1
+GET http://localhost:8080/Produto/6537
 Content-Type: application/json
 
 ###
 
-DELETE http://localhost:8080/OrgaoFiscalizador/5
+DELETE http://localhost:8080/Produto/0
 Content-Type: application/json
 
 
 ###
 
-GET http://localhost:8080/OrgaoFiscalizador
+GET http://localhost:8080/Produto
 Content-Type: application/json

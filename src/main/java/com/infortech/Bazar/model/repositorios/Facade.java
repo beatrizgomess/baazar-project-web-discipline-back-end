@@ -36,7 +36,7 @@ public class Facade {
 		this.loteRepository.create(lote);
 	}
 	
-	public void updateLote(Lote lote, int id) {
+	public void updateLote(Lote lote) {
 		this.loteRepository.update(lote);
 	}
 	

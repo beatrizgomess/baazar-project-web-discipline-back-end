@@ -34,7 +34,7 @@ public class ProdutoRestController {
 
     @DeleteMapping("Produto/{codigo}")
     public String delete(@PathVariable("codigo") int codigo){
-        Facade.getCurrentInstance().deleteOrgaoDonatarioById(codigo);
+        Facade.getCurrentInstance().deleteProdutoById(codigo);
         return "Produto deletado com sucesso!!";
 
     }
