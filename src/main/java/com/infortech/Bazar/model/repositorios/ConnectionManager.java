@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionManager {
 	private static final String URL = "jdbc:mysql://localhost:3306/bazardb";
 	private static final String USER = "root";
-	private static final String PASSWORD = "b3A_mysql";
+	private static final String PASSWORD = "root";
 	
 	private static Connection currentConnection = null;
 	

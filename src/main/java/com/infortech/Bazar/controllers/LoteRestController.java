@@ -25,19 +25,17 @@ public class LoteRestController {
 		Facade.getCurrentInstance().createLote(lote);
 		return "Lote inserido com sucesso!";
 	}
-
-	/*
-	public void create(@RequestBody Lote lt) {
-		try {
-			Facade.getCurrentInstance().createLote(lt);
-
-		}catch (SQLException e){
-			  new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao criar o registro");
-		}
-	}
-	/*
-	 */
-
+	
+//	@PostMapping("/Lote")
+//	public void create(@RequestBody Lote lt) {
+//		try {
+//			Facade.getCurrentInstance().createLote(lt);
+//
+//		}catch (SQLException e){
+//			  new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao criar o registro");
+//		}
+//	}
+	
 	
 	@PutMapping("/Lote")
 	public String update(@RequestBody Lote lote) {

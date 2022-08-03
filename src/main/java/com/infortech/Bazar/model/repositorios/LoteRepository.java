@@ -49,8 +49,9 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
     }
     
     public Lote read(Integer id) {
-		String sql = "SELECT * FROM Lote as l join OrgaoDonatario as od join OrgaoFiscalizador as ofl on (l.ID_ORGAO_DONATARIO = od.ID and l.ID_ORGAO_FISCALIZADOR = ofl.ID) where l.id =?;";
-
+		String sql = "SELECT l.ID,  l.DATA_ENTREGA, l.OBSERVACAO, ofl.ID as ID_FISCALIZADOR, ofl.NOME as NOME_FISCALIZADOR, ofl.DESCRICAO as DESCRICAO_FISCALIZADOR,\r\n"
+    			+ "od.ID as ID_DONATARIO, od.NOME as NOME_DONATARIO, od.ENDERECO, od.TELEFONE, od.HORARIO_FUNCIONAMENTO, od.DESCRICAO as DESCRICAO_DONATARIO FROM Lote as l join OrgaoDonatario as od join OrgaoFiscalizador as\r\n"
+    			+ " ofl on (l.ID_ORGAO_DONATARIO = od.ID and l.ID_ORGAO_FISCALIZADOR = ofl.ID) where l.id = ?;";
 		Lote lote = null;
 		try {
 			PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -69,18 +70,18 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 
 
 				OrgaoDonatario orgaoDonatario = new OrgaoDonatario();
-				orgaoDonatario.setId(result.getInt("ID"));
-				orgaoDonatario.setNome(result.getString("NOME"));
+				orgaoDonatario.setId(result.getInt("ID_DONATARIO"));
+				orgaoDonatario.setNome(result.getString("NOME_DONATARIO"));
 				orgaoDonatario.setEndereco(result.getString("ENDERECO"));
 				orgaoDonatario.setTelefone(result.getString("TELEFONE"));
 				orgaoDonatario.setHorarioFuncionamento(result.getString("HORARIO_FUNCIONAMENTO"));
-				orgaoDonatario.setDescricao(result.getString("DESCRICAO"));
+				orgaoDonatario.setDescricao(result.getString("DESCRICAO_DONATARIO"));
 
 
 				OrgaoFiscalizador orgaoFiscalizador = new OrgaoFiscalizador();
-				orgaoFiscalizador.setId(result.getInt("ID"));
-				orgaoFiscalizador.setNome(result.getString("NOME"));
-				orgaoFiscalizador.setDescricao(result.getString("DESCRICAO"));
+				orgaoFiscalizador.setId(result.getInt("ID_FISCALIZADOR"));
+				orgaoFiscalizador.setNome(result.getString("NOME_FISCALIZADOR"));
+				orgaoFiscalizador.setDescricao(result.getString("DESCRICAO_FISCALIZADOR"));
 
 				lote.setId_orgao_fiscalizador(orgaoFiscalizador);
 				lote.setId_orgao_donatario(orgaoDonatario);
@@ -112,7 +113,9 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
     }
     
     public List<Lote> readAll(){
-		String sql = "SELECT Lote.ID, OrgaoFiscalizador.NOME, OrgaoDonatario.NOME, Lote.DATA_ENTREGA, Lote.OBSERVACAO\n" +
+		String sql = "SELECT Lote.ID, OrgaoFiscalizador.NOME as NOME_FISCALIZADOR, OrgaoFiscalizador.DESCRICAO as DESCRICAO_FISCALIZADOR,"
+				+ "OrgaoDonatario.ENDERECO, OrgaoDonatario.TELEFONE, OrgaoDonatario.HORARIO_FUNCIONAMENTO, OrgaoDonatario.DESCRICAO as DESCRICAO_DONATARIO,"
+				+ "OrgaoDonatario.NOME as NOME_DONATARIO, Lote.DATA_ENTREGA, Lote.OBSERVACAO\n" +
 				"FROM ((Lote INNER JOIN  OrgaoFiscalizador ON Lote.ID_ORGAO_FISCALIZADOR = OrgaoFiscalizador.ID)\n" +
 				"INNER JOIN OrgaoDonatario ON Lote.ID_ORGAO_DONATARIO = OrgaoDonatario.ID);";
 
@@ -133,21 +136,22 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 
 				OrgaoFiscalizador orgaoFiscalizador = new OrgaoFiscalizador();
 				orgaoFiscalizador.setId(result.getInt("ID"));
-				orgaoFiscalizador.setNome(result.getString("NOME"));
+				orgaoFiscalizador.setNome(result.getString("NOME_FISCALIZADOR"));
+				orgaoFiscalizador.setDescricao(result.getString("DESCRICAO_FISCALIZADOR"));
 
 
 
 				OrgaoDonatario orgaoDonatario = new OrgaoDonatario();
 				orgaoDonatario.setId(result.getInt("ID"));
-				/*
-				orgaoDonatario.setNome(result.getString("NOME"));
+				
+				orgaoDonatario.setNome(result.getString("NOME_DONATARIO"));
+				
 				orgaoDonatario.setEndereco(result.getString("ENDERECO"));
 				orgaoDonatario.setTelefone(result.getString("TELEFONE"));
 				orgaoDonatario.setHorarioFuncionamento(result.getString("HORARIO_FUNCIONAMENTO"));
-				orgaoDonatario.setDescricao(result.getString("DESCRICAO"));
-
-				 */
-
+				orgaoDonatario.setDescricao(result.getString("DESCRICAO_DONATARIO"));
+				
+				
 				lote.setId_orgao_donatario(orgaoDonatario);
 				lote.setId_orgao_fiscalizador(orgaoFiscalizador);
 

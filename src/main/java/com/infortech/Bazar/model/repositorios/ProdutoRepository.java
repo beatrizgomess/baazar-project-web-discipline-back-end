@@ -55,8 +55,13 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
     }
     
     public Produto read(Integer codigo) {
-        String sql = "select * from Produto as p join Lote as lt on (p.id_lote = lt.id) where p.codigo = ?";
-
+    	String sql = "select p.CODIGO, p.NOME, p.DESCRICAO as PROD_DESC, p.ID_LOTE,\r\n"
+    			+ "lt.ID as LT_ID, lt.DATA_ENTREGA, lt.OBSERVACAO,\r\n"
+    			+ "od.ID as OD_ID, od.NOME as OD_NOME, od.ENDERECO, od.TELEFONE, od.HORARIO_FUNCIONAMENTO, od.DESCRICAO as OD_DESC,\r\n"
+    			+ "ofl.ID as OF_ID, ofl.NOME as OF_NOME, ofl.DESCRICAO as OF_DESC\r\n"
+    			+ "from Produto as p join Lote as lt join OrgaoFiscalizador as ofl join OrgaoDonatario as od\r\n"
+    			+ "on (p.id_lote = lt.id) where p.codigo = ? group by p.CODIGO;";
+    	
         Produto produto = null;
         try {
             PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -71,20 +76,28 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
 
                 produto.setCodigo(result.getInt("CODIGO"));
                 produto.setNome(result.getString("NOME"));
-                produto.setDescricao(result.getString("DESCRICAO"));
+                produto.setDescricao(result.getString("PROD_DESC"));
 
 
                 Lote lote = new Lote();
 
-                lote.setId(result.getInt("ID"));
+                lote.setId(result.getInt("LT_ID"));
                 lote.setDataEntrega(result.getDate("DATA_ENTREGA"));
-                lote.setObservacao(result.getString("OBSERVAÇÃO"));
+                lote.setObservacao(result.getString("OBSERVACAO"));
 
                 OrgaoFiscalizador orgaoFiscalizador = new OrgaoFiscalizador();
-                orgaoFiscalizador.setId(result.getInt("ID"));
+                orgaoFiscalizador.setId(result.getInt("OF_ID"));
+                orgaoFiscalizador.setNome(result.getString("OF_NOME"));
+                orgaoFiscalizador.setDescricao(result.getString("OF_DESC"));
 
                 OrgaoDonatario orgaoDonatario = new OrgaoDonatario();
-                orgaoDonatario.setId(result.getInt("ID"));
+                orgaoDonatario.setId(result.getInt("OD_ID"));
+                orgaoDonatario.setDescricao(result.getString("OD_DESC"));
+                orgaoDonatario.setEndereco(result.getString("ENDERECO"));
+                orgaoDonatario.setHorarioFuncionamento(result.getString("HORARIO_FUNCIONAMENTO"));
+                orgaoDonatario.setNome(result.getString("OD_NOME"));
+                orgaoDonatario.setTelefone(result.getString("TELEFONE"));
+                
                 lote.setId_orgao_fiscalizador(orgaoFiscalizador);
                 lote.setId_orgao_donatario(orgaoDonatario);
 
