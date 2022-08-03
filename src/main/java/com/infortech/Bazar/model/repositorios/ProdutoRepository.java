@@ -98,8 +98,8 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
                 orgaoDonatario.setNome(result.getString("OD_NOME"));
                 orgaoDonatario.setTelefone(result.getString("TELEFONE"));
                 
-                lote.setId_orgao_fiscalizador(orgaoFiscalizador);
-                lote.setId_orgao_donatario(orgaoDonatario);
+                lote.setOrgaoFiscalizador(orgaoFiscalizador);
+                lote.setOrgaoDonatario(orgaoDonatario);
 
                 produto.setId_lote(lote);
 
@@ -133,8 +133,12 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
 
     
     public List<Produto> readAll() {
-        String sql = "select * from Produto as p join Lote as lt on (p.id_lote = lt.id)";
+//        String sql = "select * from Produto as p join Lote as lt on (p.id_lote = lt.id)";
+    	
+    	String sql = "select p.CODIGO, p.ID_LOTE,  lt.ID_ORGAO_FISCALIZADOR, lt.ID_ORGAO_DONATARIO, p.NOME, p.DESCRICAO, lt.DATA_ENTREGA, lt.OBSERVACAO \r\n"
+    			+ "from Produto as p join Lote as lt on (p.id_lote = lt.id)";
 
+    	
         List<Produto> produtos = null;
         try {
             PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
@@ -153,9 +157,12 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
 
 
                 Lote lote = new Lote();
-                lote.setId(result.getInt("ID"));
+                lote.setId(result.getInt("ID_LOTE"));
                 lote.setDataEntrega(result.getDate("DATA_ENTREGA"));
                 lote.setObservacao(result.getString("OBSERVACAO"));
+                lote.setIdOrgaoDonatario(result.getInt("ID_ORGAO_DONATARIO"));
+                lote.setIdOrgaoFiscalizador(result.getInt("ID_ORGAO_FISCALIZADOR"));
+                
 
                 produto.setId_lote(lote);
                 produtos.add(produto);

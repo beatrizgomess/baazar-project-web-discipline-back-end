@@ -19,8 +19,8 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 		String sql 	= "INSERT INTO Lote(ID_ORGAO_FISCALIZADOR, ID_ORGAO_DONATARIO, DATA_ENTREGA, OBSERVACAO) VALUES (?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = ConnectionManager.getCurrentConnection().prepareStatement(sql);
-			ps.setInt(1, lt.getId_orgao_fiscalizador().getId());
-			ps.setInt(2, lt.getId_orgao_donatario().getId());
+			ps.setInt(1, lt.getOrgaoFiscalizador().getId());
+			ps.setInt(2, lt.getOrgaoDonatario().getId());
 			ps.setString(3, String.valueOf(lt.getDataEntrega()));
 			ps.setString(4, lt.getObservacao());
 			
@@ -83,8 +83,8 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 				orgaoFiscalizador.setNome(result.getString("NOME_FISCALIZADOR"));
 				orgaoFiscalizador.setDescricao(result.getString("DESCRICAO_FISCALIZADOR"));
 
-				lote.setId_orgao_fiscalizador(orgaoFiscalizador);
-				lote.setId_orgao_donatario(orgaoDonatario);
+				lote.setOrgaoFiscalizador(orgaoFiscalizador);
+				lote.setOrgaoDonatario(orgaoDonatario);
 			}
 
 		} catch (SQLException ex) {
@@ -152,8 +152,8 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 				orgaoDonatario.setDescricao(result.getString("DESCRICAO_DONATARIO"));
 				
 				
-				lote.setId_orgao_donatario(orgaoDonatario);
-				lote.setId_orgao_fiscalizador(orgaoFiscalizador);
+				lote.setOrgaoDonatario(orgaoDonatario);
+				lote.setOrgaoFiscalizador(orgaoFiscalizador);
 
 				lotes.add(lote);
 			}
