@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import com.infortech.Bazar.model.classes.Lote;
 import com.infortech.Bazar.model.repositorios.Facade;
 import org.springframework.web.server.ResponseStatusException;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class LoteRestController {
 	Facade facade = new Facade();	

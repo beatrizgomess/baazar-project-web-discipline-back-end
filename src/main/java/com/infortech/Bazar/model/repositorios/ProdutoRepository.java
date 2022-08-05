@@ -23,7 +23,8 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
             PreparedStatement pstm = ConnectionManager.getCurrentConnection().prepareStatement(sql);
 
             pstm.setInt(1, (produto.getCodigo()));
-            pstm.setInt(2, (produto.getId_lote().getId()));
+//            pstm.setInt(2, (produto.getId_lote().getId()));
+            pstm.setInt(2, produto.getIdLote());
             pstm.setString(3, (produto.getNome()));
             pstm.setString(4, (produto.getDescricao()));
 
@@ -154,6 +155,7 @@ public class ProdutoRepository implements GenericRepository<Produto, Integer>{
                 produto.setCodigo(result.getInt("CODIGO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));
+                produto.setIdLote(result.getInt("ID_LOTE"));
 
 
                 Lote lote = new Lote();

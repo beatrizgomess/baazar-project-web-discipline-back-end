@@ -4,7 +4,7 @@ public class Produto {
 	private int codigo;
 	private String nome;
 	private String descricao;
-
+	private int idLote;
 	private Lote id_lote;
 
 
@@ -33,6 +33,14 @@ public class Produto {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public int getIdLote() {
+		return idLote;
+	}
+
+	public void setIdLote(int idLote) {
+		this.idLote = idLote;
 	}
 	
 	

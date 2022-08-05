@@ -19,8 +19,10 @@ public class LoteRepository implements GenericRepository<Lote, Integer>{
 		String sql 	= "INSERT INTO Lote(ID_ORGAO_FISCALIZADOR, ID_ORGAO_DONATARIO, DATA_ENTREGA, OBSERVACAO) VALUES (?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = ConnectionManager.getCurrentConnection().prepareStatement(sql);
-			ps.setInt(1, lt.getOrgaoFiscalizador().getId());
-			ps.setInt(2, lt.getOrgaoDonatario().getId());
+//			ps.setInt(1, lt.getOrgaoFiscalizador().getId());
+//			ps.setInt(2, lt.getOrgaoDonatario().getId());
+			ps.setInt(1, lt.getIdOrgaoFiscalizador());
+			ps.setInt(2, lt.getIdOrgaoDonatario());
 			ps.setString(3, String.valueOf(lt.getDataEntrega()));
 			ps.setString(4, lt.getObservacao());
 			
