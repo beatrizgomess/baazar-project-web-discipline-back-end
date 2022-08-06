@@ -1,0 +1,34 @@
+POST http://localhost:8080/OrgaoFiscalizador
+Content-Type: application/json
+
+{"nome": "Receita Federal",
+  "descricao":"Descrição do orgão fiscalizador"
+
+}
+
+###
+
+PUT http://localhost:8080/OrgaoDonatario
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nome": "Policia Federal - [ PF ] ",
+  "descricao":"Descrição do orgão fiscalizador"
+}
+
+###
+
+GET http://localhost:8080/OrgaoFiscalizador/1
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/OrgaoFiscalizador/5
+Content-Type: application/json
+
+
+###
+
+GET http://localhost:8080/OrgaoFiscalizador
+Content-Type: application/json

@@ -1,0 +1,48 @@
+POST http://localhost:8080/Lote
+Content-Type: application/json
+
+{
+  "id_orgao_fiscalizador": {
+    "id": 4,
+    "nome": "Receita Federal",
+    "descricao":"Descrição do orgão fiscalizador"
+  },
+  "id_orgao_donatario": {
+    "id": 2,
+    "nome": "Hospital do IMIP",
+    "endereco": "Rua dos coelhos",
+    "telefone": "(81) 99963-7826",
+    "horarioFuncionamento": "9h AM e 17h PM",
+    "descricao": "Doe para o hospital do imip"
+  },
+  "dataEntrega": "2022-08-02",
+  "observacao":"VESTIMENTA INFANTIL"
+
+}
+
+###
+
+PUT http://localhost:8080/Lote
+Content-Type: application/json
+
+{
+  "dataEntrega": "2022-08-02",
+  "observacao":"ROUPAAAA INFANTIL"
+}
+
+
+###
+
+GET http://localhost:8080/Lote/3
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/Lote/1
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/Lote
+Content-Type: application/json
+
